@@ -1,0 +1,23 @@
+# Eclipse 워크스페이스 메타데이터 (절대 올리지 말 것)
+/.metadata/
+/Servers/
+
+# OS 임시 파일
+.DS_Store
+Thumbs.db
+
+# 빌드 결과물 (Maven)
+/target/
+*.log
+
+# 임시/백업 파일
+*.bak
+*.swp
+*.tmp
+
+# Maven Wrapper
+.mvn/
+!/.mvn/wrapper/maven-wrapper.jar
+mvnw
+mvnw.cmd
+>>>>>>> 21797b1 (hibernate 수업내용)
