@@ -95,7 +95,6 @@
 		
 		xhttp.onload=function(){
 
-			// 맛집 상호명
 			console.log("서버의 응답 정보는 ", this.responseText); // this는 xhttp
 
 			let store=JSON.parse(this.responseText); // string->object
@@ -104,7 +103,6 @@
 			$("#aside_detail input[name='tel']").val(store.tel);
 			$("#aside_detail select").val(store.foodType.food_type_id);
 			
-			// 연락처
 			
 		};
 		xhttp.send();
