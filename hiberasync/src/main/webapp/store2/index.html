@@ -85,23 +85,18 @@ tr:nth-child(even) {
 	}
 	
 	function getDetail(store_id){
-		// 여기서 값 세팅
-		$("#aside_detail input[name='store_id']").val(store_id); 
-		
 		$.ajax({
-			url:"/store/detail",
+			url:"/store/detail?store_id="+store_id,
 			type:"GET",
-			data:{	
-				store_id:store_id,
-				food_type_id:$("#aside_detail select").val(),
-				store_name:$("#aside_detail input[name='store_name']").val(),
-				tel:$("#aside_detail input[name='tel']").val()
-			},
 			success:function(result, status, xhr){
-				console.log("result is ", result),
-				console.log("status is ", status),
-				console.log("xhr is ", xhr)
-				
+				console.log("result is ", result);
+				console.log("status is ", status);
+				console.log("xhr is ", xhr);
+				// 우측 화면 출력
+				$("#aside_detail input[name='store_id']").val(result.store_id); // hidden
+				$("#aside_detail select").val(result.foodType.food_type_id);				
+				$("#aside_detail input[name='store_name']").val(result.store_name);
+				$("#aside_detail input[name='tel']").val(result.tel);
 				
 
 			},
@@ -178,12 +173,44 @@ tr:nth-child(even) {
 		
 		});
 
-	}	
-	
+	}
 	
 	// 삭제하기
 	function del(){
-
+		$.ajax({
+			url:"/store/del",
+			type:"POST",
+			data:{
+				store_id:$("#aside_detail input[name='store_id']").val()
+			},
+			success:function(result, status, xhr){
+				if(xhr.status==204){
+					getStoreList();
+				}
+			}
+		
+		});	
+	
+	}
+	
+	
+	// 수정하기
+	function edit(){
+		$.ajax({
+			type:"POST",
+			url: "/store/edit",
+			data:{ // 파라미터 데이터를 json형식으로 보내기
+				food_type_id:$("#aside_detail select").val(),
+				store_id:$("#aside_detail input[name='store_id']").val(),
+				store_name:$("#aside_detail input[name='store_name']").val(),
+				tel:$("#aside_detail input[name='tel']").val()
+			},
+			success:function(result, status, xhr){
+				if(xhr.status==204){
+					getStoreList();
+				}
+			}
+		});
 	}
 	
 	$(()=>{

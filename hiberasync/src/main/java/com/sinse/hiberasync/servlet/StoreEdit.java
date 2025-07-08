@@ -53,16 +53,19 @@ public class StoreEdit extends HttpServlet {
 		Gson gson = new Gson(); // 메세지를 문자열로 바꾸기 위해
 		response.setContentType("application/json"); // json임을 브라우저에게 알려주자!
 		PrintWriter out = response.getWriter();
+		
 		try {
 			storeDAO.update(store);
 			response.setStatus(HttpServletResponse.SC_NO_CONTENT); // 204(성공) 안해도 되지만 주도적으로 메세지를 뿌리고 싶다면..
+			message.setResult("success");
+			message.setMsg("수정 성공");
+			
 		} catch (StoreException e) {
 			e.printStackTrace();
 			message.setResult("fail");
 			message.setMsg(e.getMessage());
-			String responseMsg=gson.toJson(message);
-			out.print(responseMsg);
-			
 		}
+		String responseMsg=gson.toJson(message);		
+		out.print(responseMsg);
 	}
 }

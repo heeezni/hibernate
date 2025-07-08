@@ -36,14 +36,17 @@ public class StoreDelete extends HttpServlet {
 		try {
 			storeDAO.delete(Integer.parseInt(store_id));
 			response.setStatus(HttpServletResponse.SC_NO_CONTENT); // 204
+			
+			message.setResult("success");
+			message.setMsg("삭제 성공"); //body가 있어야함
 
 		} catch (StoreException e) {
 			e.printStackTrace();
 			message.setResult("fail");
 			message.setMsg(e.getMessage());
-			String jsonResult=gson.toJson(message); // 객체를 json문자여로 변환
-			out.print(jsonResult); // 웹브라우저에 전송 X, 톰캣이 응답정보를 만들때 참고하는 스트링
 		}
+		String jsonResult=gson.toJson(message); // 객체를 json문자여로 변환
+		out.print(jsonResult); // 웹브라우저에 전송 X, 톰캣이 응답정보를 만들때 참고하는 스트링
 
 	}
 

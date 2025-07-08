@@ -37,18 +37,13 @@ public class StoreDetail extends HttpServlet{
 		try {
 			Store store = storeDAO.select(Integer.parseInt(store_id));
 			out.print(gson.toJson(store));//문자열 로 변환하여 전송하기 위함
-			response.setStatus(HttpServletResponse.SC_CREATED); //201
-			
-			// !! JQuery AJAX쓰려면, 성공 메시지를 JSON으로 보내야 success 메서드 동작
-			message.setResult("success");
-			message.setMsg("상세보기 성공");
 
 		} catch (StoreException e) {
 			e.printStackTrace();
 			message.setResult("fail");
 			message.setMsg(e.getMessage());
+			out.print(gson.toJson(message));
 		}
-		out.print(gson.toJson(message));
 		
 	}
 }
