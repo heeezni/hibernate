@@ -78,6 +78,27 @@ public class StoreDAO {
 		}
 		
 	}
+	
+	// 한 건 삭제하기
+	public void delete(int store_id) throws StoreException{
+		Transaction tx=null;
+		
+		try(Session session = config.getSession()){
+			tx=session.beginTransaction();
+			
+			Store store=session.get(Store.class, store_id);
+			if(store!=null) { // 스토어가 존재할 때만 삭제하겠다!
+				session.delete(store); // 모델을 원함				
+			}
+			tx.commit();
+		} catch(Exception e) {
+			e.printStackTrace();
+			if(tx!=null)tx.rollback();
+			throw new StoreException("삭제 실패", e);
+		}
+		
+	}
+	
 }
 
 
