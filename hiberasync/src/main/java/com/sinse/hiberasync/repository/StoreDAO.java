@@ -60,6 +60,24 @@ public class StoreDAO {
 		}
 		return store;
 	}
+	
+	// 한 건 수정하기!
+	public void update(Store store) throws StoreException {
+		Transaction tx=null;
+		
+		try(Session session=config.getSession()){
+			tx=session.beginTransaction();
+			// 이 안에서 쿼리 수행
+			session.update(store);
+			
+			tx.commit();
+		}catch(Exception e) {
+			e.printStackTrace();
+			if(tx!=null)tx.rollback();
+			throw new StoreException("수정 실패", e);
+		}
+		
+	}
 }
 
 

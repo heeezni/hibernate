@@ -24,7 +24,7 @@ public class FoodTypeDAO {
 		 즉 언어 차원에서 개발자가 해야할  close() 메서드 호출을 자동으로 해줌..
 		 주의) 모든 close() 메서드를 대상으로 하지 않고, Closeable 을 구현한 객체만을 대상으로 함
 		 		개발자는 try~catch 만 집중하면 됨..
-		*/
+		*/ 
 		try(Session session=config.getSession()){
 			
 			tx=session.beginTransaction();
