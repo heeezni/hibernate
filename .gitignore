@@ -20,4 +20,6 @@ Thumbs.db
 !/.mvn/wrapper/maven-wrapper.jar
 mvnw
 mvnw.cmd
->>>>>>> 21797b1 (hibernate 수업내용)
+
+# Maven 메타데이터 무시 (빌드시 생김)
+**/pom.properties
